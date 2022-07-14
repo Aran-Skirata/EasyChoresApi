@@ -38,9 +38,9 @@ public class AccountController : BaseApiController
         
         if (!result.Succeeded) return BadRequest("Could not create user");
 
-        var roleResult = await _userManager.AddToRoleAsync(user, "Employee");
+        // var roleResult = await _userManager.AddToRoleAsync(user, "User");
 
-        if (!roleResult.Succeeded) return BadRequest("Could not add role to user");
+        // if (!roleResult.Succeeded) return BadRequest("Could not add role to user");
 
         return new UserDto
         {
