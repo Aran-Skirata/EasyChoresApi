@@ -12,7 +12,7 @@ UserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>
     {
     }
 
-    private DbSet<User> Users { get; set; }
+    private DbSet<User> User { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

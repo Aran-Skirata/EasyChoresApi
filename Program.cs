@@ -1,5 +1,12 @@
+using EasyChoresApi.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<DataContext>(opt =>
+{
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("EasyChoresDb"));
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
