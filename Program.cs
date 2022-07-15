@@ -3,6 +3,7 @@ using EasyChoresApi.Data;
 using EasyChoresApi.Entities;
 using EasyChoresApi.Helpers;
 using EasyChoresApi.Interfaces;
+using EasyChoresApi.Repositories;
 using EasyChoresApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -30,7 +31,12 @@ builder.Services.AddIdentityCore<User>()
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IReminderRepository, ReminderRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddControllers(
+    options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {

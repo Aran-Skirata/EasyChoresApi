@@ -1,7 +1,6 @@
 namespace EasyChoresApi.DTO;
 
-public class UserDto
+public class MemberDto
 {
     public string UserName { get; set; }
-    public string Token { get; set; }
 }
