@@ -6,14 +6,12 @@ namespace EasyChoresApi.Interfaces;
 
 public interface IEventRepository
 {
-    public void CreateEvent(Event eventEntity);
-    public Task<ActionResult<IEnumerable<Event>>> GetEvents();
-    public Task<ActionResult<Event>> GetEvent(int eventId);
-    public  Task<ActionResult<IEnumerable<EventDto>>> GetEventDtos();
-    public Task<ActionResult<EventDto>> GetEventDto(int eventId);
+    public Task<EventDto> GetEventAsync(int id);
+    public Task<IEnumerable<EventDto>> GetEventsAsync();
+    public Task<Event> GetEventEntityAsync(int id);
+    public void AddEvent(Event eventEntity);
     public void UpdateEvent(Event eventEntity);
-    public void DeleteEvent(int eventId);
-
     public Task<bool> SaveAllAsync();
+
 
 }

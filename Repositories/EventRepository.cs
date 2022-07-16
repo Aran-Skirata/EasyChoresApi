@@ -1,5 +1,4 @@
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using EasyChoresApi.Data;
 using EasyChoresApi.DTO;
 using EasyChoresApi.Entities;
@@ -19,48 +18,33 @@ public class EventRepository : IEventRepository
         _dataContext = dataContext;
         _mapper = mapper;
     }
-
-
-    public void CreateEvent(Event eventEntity)
+    public async Task<EventDto> GetEventAsync(int id)
     {
-        _dataContext.Events.Add(eventEntity);
+        return _mapper.Map<EventDto>(await _dataContext.Events.SingleOrDefaultAsync(e => e.Id == id));
     }
 
-    public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
+    public Task<IEnumerable<EventDto>> GetEventsAsync()
     {
-        return await _dataContext.Events.Include(e => e.UserEvents).ToListAsync();
+        throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<Event>> GetEvent(int eventId)
+    public Task<Event> GetEventEntityAsync(int id)
     {
-        return await _dataContext.Events.Include(e => e.UserEvents).SingleOrDefaultAsync(e => e.Id == eventId);
+        throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<IEnumerable<EventDto>>> GetEventDtos()
+    public void AddEvent(Event eventEntity)
     {
-        return await _dataContext.Events.Include(e => e.UserEvents)
-            .ProjectTo<EventDto>(_mapper.ConfigurationProvider).ToListAsync();
-    }
-
-    public async Task<ActionResult<EventDto>> GetEventDto(int eventId)
-    {
-        return await _dataContext.Events.Where(e=> e.Id == eventId).Include(e => e.UserEvents)
-            .ProjectTo<EventDto>(_mapper.ConfigurationProvider).SingleOrDefaultAsync();
+        throw new NotImplementedException();
     }
 
     public void UpdateEvent(Event eventEntity)
     {
-        _dataContext.Entry(eventEntity).State = EntityState.Modified;
-    }
-    
-
-    public async void DeleteEvent(int eventId)
-    { 
-        _dataContext.Events.Remove(await _dataContext.Events.SingleOrDefaultAsync(e => e.Id == eventId));
+        throw new NotImplementedException();
     }
 
-    public async Task<bool> SaveAllAsync()
+    public Task<bool> SaveAllAsync()
     {
-        return await _dataContext.SaveChangesAsync() > 0;
+        throw new NotImplementedException();
     }
 }
