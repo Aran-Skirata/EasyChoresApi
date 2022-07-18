@@ -17,4 +17,9 @@ public class UserRepository : IUserRepository
     {
         return await _dataContext.Users.SingleOrDefaultAsync(u => u.UserName == username);
     }
+
+    public async Task<User> GetUserByIdAsync(int id)
+    {
+        return await _dataContext.Users.SingleOrDefaultAsync(u => u.Id == id);
+    }
 }

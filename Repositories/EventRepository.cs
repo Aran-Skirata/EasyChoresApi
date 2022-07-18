@@ -1,4 +1,5 @@
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using EasyChoresApi.Data;
 using EasyChoresApi.DTO;
 using EasyChoresApi.Entities;
@@ -20,31 +21,36 @@ public class EventRepository : IEventRepository
     }
     public async Task<EventDto> GetEventAsync(int id)
     {
-        return _mapper.Map<EventDto>(await _dataContext.Events.SingleOrDefaultAsync(e => e.Id == id));
+        return await _dataContext.Events.ProjectTo<EventDto>(_mapper.ConfigurationProvider).SingleOrDefaultAsync(e => e.Id == id);
     }
 
-    public Task<IEnumerable<EventDto>> GetEventsAsync()
+    public async Task<IEnumerable<EventDto>> GetEventsAsync()
     {
-        throw new NotImplementedException();
+        return await _dataContext.Events.ProjectTo<EventDto>(_mapper.ConfigurationProvider).ToListAsync();
     }
 
-    public Task<Event> GetEventEntityAsync(int id)
+    public async Task<Event> GetEventEntityAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _dataContext.Events.SingleOrDefaultAsync(e => e.Id == id);
     }
 
     public void AddEvent(Event eventEntity)
     {
-        throw new NotImplementedException();
+        _dataContext.Events.Add(eventEntity);
+    }
+
+    public void DeleteEvent(Event eventEntity)
+    {
+        _dataContext.Events.Remove(eventEntity);
     }
 
     public void UpdateEvent(Event eventEntity)
     {
-        throw new NotImplementedException();
+        _dataContext.Entry(eventEntity).State = EntityState.Modified;
     }
 
-    public Task<bool> SaveAllAsync()
+    public async Task<bool> SaveAllAsync()
     {
-        throw new NotImplementedException();
+        return await _dataContext.SaveChangesAsync() > 0;
     }
 }

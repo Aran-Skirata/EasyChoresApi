@@ -14,5 +14,4 @@ public class Event
     public string? FontColor { get; set; }
     public User Owner { get; set; }
     public int OwnerId { get; set; }
-    public ICollection<UserEvent> UserEvents { get; set; }
 }

@@ -51,8 +51,8 @@ namespace EasyChoresApi.Migrations
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
+                    b.Property<bool?>("Status")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("ThemeColor")
                         .HasColumnType("text");
@@ -85,8 +85,8 @@ namespace EasyChoresApi.Migrations
                     b.Property<DateTime>("ReminderTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
+                    b.Property<bool?>("Status")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
@@ -189,52 +189,6 @@ namespace EasyChoresApi.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("EasyChoresApi.Entities.UserEvent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserEvent");
-                });
-
-            modelBuilder.Entity("EasyChoresApi.Entities.UserReminder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ReminderId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReminderId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserReminder");
                 });
 
             modelBuilder.Entity("EasyChoresApi.Entities.UserRole", b =>
@@ -362,44 +316,6 @@ namespace EasyChoresApi.Migrations
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("EasyChoresApi.Entities.UserEvent", b =>
-                {
-                    b.HasOne("EasyChoresApi.Entities.Event", "Event")
-                        .WithMany("UserEvents")
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("EasyChoresApi.Entities.User", "User")
-                        .WithMany("UserEvents")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Event");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EasyChoresApi.Entities.UserReminder", b =>
-                {
-                    b.HasOne("EasyChoresApi.Entities.Reminder", "Reminder")
-                        .WithMany("UserReminders")
-                        .HasForeignKey("ReminderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("EasyChoresApi.Entities.User", "User")
-                        .WithMany("UserReminders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Reminder");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("EasyChoresApi.Entities.UserRole", b =>
                 {
                     b.HasOne("EasyChoresApi.Entities.Role", "Role")
@@ -455,16 +371,6 @@ namespace EasyChoresApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EasyChoresApi.Entities.Event", b =>
-                {
-                    b.Navigation("UserEvents");
-                });
-
-            modelBuilder.Entity("EasyChoresApi.Entities.Reminder", b =>
-                {
-                    b.Navigation("UserReminders");
-                });
-
             modelBuilder.Entity("EasyChoresApi.Entities.Role", b =>
                 {
                     b.Navigation("UserRoles");
@@ -475,10 +381,6 @@ namespace EasyChoresApi.Migrations
                     b.Navigation("OwnedEvents");
 
                     b.Navigation("OwnedReminders");
-
-                    b.Navigation("UserEvents");
-
-                    b.Navigation("UserReminders");
 
                     b.Navigation("UserRoles");
                 });

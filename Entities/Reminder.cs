@@ -8,5 +8,4 @@ public class Reminder
     public bool? Status { get; set; }
     public User Owner { get; set; }
     public int OwnerId { get; set; }
-    public ICollection<UserReminder> UserReminders { get; set; }
 }
