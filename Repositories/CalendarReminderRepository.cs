@@ -5,41 +5,41 @@ using EasyChoresApi.Interfaces;
 
 namespace EasyChoresApi.Repositories;
 
-public class ReminderRepository : IReminderRepository
+public class CalendarReminderRepository : ICalendarReminderRepository
 {
     private readonly DataContext _dataContext;
 
-    public ReminderRepository(DataContext dataContext)
+    public CalendarReminderRepository(DataContext dataContext)
     {
         _dataContext = dataContext;
     }
     
-    public Task<ReminderDto> GetReminderAsync(int id)
+    public Task<CalendarReminderDto> GetReminderAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<ReminderDto>> GetRemindersAsync()
+    public Task<IEnumerable<CalendarReminderDto>> GetRemindersAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<Reminder> GetReminderEntityAsync(int id)
+    public Task<CalendarReminder> GetReminderEntityAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public void AddReminder(Reminder reminder)
+    public void AddReminder(CalendarReminder reminder)
     {
         throw new NotImplementedException();
     }
 
-    public void DeleteReminder(Reminder reminder)
+    public void DeleteReminder(CalendarReminder reminder)
     {
         throw new NotImplementedException();
     }
 
-    public void UpdateReminder(Reminder reminder)
+    public void UpdateReminder(CalendarReminder reminder)
     {
         throw new NotImplementedException();
     }

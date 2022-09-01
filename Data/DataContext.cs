@@ -12,9 +12,9 @@ UserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>
     {
     }
 
-    public DbSet<Event> Events { get; set; }
-    public DbSet<Reminder> Reminders { get; set; }
-
+    public DbSet<CalendarEvent> CalendarEvents { get; set; }
+    public DbSet<CalendarReminder> CalendarReminders { get; set; }
+ 
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -30,12 +30,12 @@ UserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>
             .HasForeignKey(ur => ur.RoleId)
             .IsRequired();
 
-        builder.Entity<User>().HasMany(u => u.OwnedEvents)
+        builder.Entity<User>().HasMany(u => u.OwnedCalendarEvents)
             .WithOne(e => e.Owner)
             .HasForeignKey(e => e.OwnerId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.Entity<User>().HasMany(u => u.OwnedReminders)
+        builder.Entity<User>().HasMany(u => u.OwnedCalendarReminders)
             .WithOne(r => r.Owner)
             .HasForeignKey(r => r.OwnerId)
             .OnDelete(DeleteBehavior.Restrict);

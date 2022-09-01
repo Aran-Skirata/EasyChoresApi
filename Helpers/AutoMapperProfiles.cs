@@ -13,8 +13,8 @@ public class AutoMapperProfiles : Profile
         CreateMap<RegisterDto, User>();
         CreateMap<User, UserDto>();
         CreateMap<User, MemberDto>();
-        CreateMap<EventDto, Event>();
-        CreateMap<Event, EventDto>();
+        CreateMap<CalendarEventDto, CalendarEvent>();
+        CreateMap<CalendarEvent, CalendarEventDto>();
 
     }
     

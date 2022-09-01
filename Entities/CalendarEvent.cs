@@ -1,9 +1,9 @@
-namespace EasyChoresApi.DTO;
+namespace EasyChoresApi.Entities;
 
-public class EventDto
-{ 
+public class CalendarEvent
+{
     public int Id { get; set; }
-    public string? Title { get; set; }
+    public string Title { get; set; }
     public string? Body { get; set; }
     public string? Category { get; set; }
     public string? Location { get; set; }
@@ -12,6 +12,6 @@ public class EventDto
     public DateTime? EndDate { get; set; }
     public string? ThemeColor { get; set; }
     public string? FontColor { get; set; }
+    public User Owner { get; set; }
     public int OwnerId { get; set; }
-    
 }
